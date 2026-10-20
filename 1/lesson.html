@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人介绍</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7ff 0%, #eaf6ff 100%);
+            color: #1f2937;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .card {
+            width: min(100%, 980px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+            border-radius: 28px;
+            overflow: hidden;
+        }
+
+        .topbar {
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            color: white;
+            padding: 20px 32px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            padding: 32px;
+        }
+
+        .photo-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .photo-box {
+            width: 240px;
+            height: 300px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+            border: 2px dashed #8ab4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(79, 70, 229, 0.08);
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .photo-box.has-image img {
+            display: block;
+        }
+
+        .photo-placeholder {
+            text-align: center;
+            color: #64748b;
+            font-weight: 600;
+            line-height: 1.8;
+        }
+
+        .photo-placeholder .emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            background: #4f46e5;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s ease;
+            user-select: none;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-1px);
+            background: #4338ca;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4338ca;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            width: fit-content;
+        }
+
+        .intro {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #475569;
+            margin: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px 18px;
+        }
+
+        .item .label {
+            display: block;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .item strong {
+            font-size: 1.05rem;
+            color: #0f172a;
+        }
+
+        .footer-note {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 760px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-box {
+                width: 220px;
+                height: 280px;
+            }
+
+            .topbar {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="card">
+            <div class="topbar">HELLO · はじめまして</div>
+
+            <div class="content">
+                <div class="photo-panel">
+                    <div class="photo-box has-image" id="photoBox">
+                        <img id="previewImg" src="20.jpg" alt="个人照片" />
+                        <div class="photo-placeholder" id="placeholder" style="display: none;">
+                            <span class="emoji">📷</span>
+                            ここをクリック<br />写真を追加
+                        </div>
+                    </div>
+                    <label class="upload-btn" for="photoUpload">写真をアップロード</label>
+                    <input id="photoUpload" type="file" accept="image/*" />
+                </div>
+
+                <div class="info">
+                    <div>
+                        <div class="tag">フロントエンド学習者 / デザイン愛好者</div>
+                        <h1>李浚銘</h1>
+                    </div>
+
+                    <p class="intro">
+                        こんにちは、私は李浚銘です。学ぶことが好きで、デザインとITにも興味があります。
+                        明るく、前向きに頑張るタイプです。毎日少しずつ成長していきたいと思っています。
+                    </p>
+
+                    <div class="item" style="background: #eef2ff; border-color: #c7d2fe;">
+                        <span class="label">学号</span>
+                        <strong>R25E2519</strong>
+                    </div>
+
+                    <div class="grid">
+                        <div class="item">
+                            <span class="label">年齢</span>
+                            <strong>20歳</strong>
+                        </div>
+                        <div class="item">
+                            <span class="label">所在地</span>
+                            <strong>中国</strong>
+                        </div>
+                        <div class="item">
+                            <span class="label">趣味</span>
+                            <strong>サッカー / 音楽</strong>
+                        </div>
+                        <div class="item">
+                            <span class="label">目標</span>
+                            <strong>フロントエンドエンジニア</strong>
+                        </div>
+                    </div>
+
+                    <div class="footer-note">
+                        これは私の個人紹介ページです。ここでは私の基本情報や趣味、目標などを紹介しています。
+                        私は常に新しいことを学び、成長し続けることを大切にしています。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const photoUpload = document.getElementById('photoUpload');
+        const previewImg = document.getElementById('previewImg');
+        const photoBox = document.getElementById('photoBox');
+        const placeholder = document.getElementById('placeholder');
+
+        photoUpload.addEventListener('change', function () {
+            const file = this.files && this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                previewImg.src = event.target.result;
+                photoBox.classList.add('has-image');
+                placeholder.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
